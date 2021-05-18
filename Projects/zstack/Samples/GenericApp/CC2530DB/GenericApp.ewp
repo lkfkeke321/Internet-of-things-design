@@ -6370,10 +6370,10 @@
   <group>
     <name>App</name>
     <file>
-      <name>$PROJ_DIR$\..\Source\GenericApp.c</name>
+      <name>$PROJ_DIR$\..\Source\Coordinator.c</name>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\Source\GenericApp.h</name>
+      <name>$PROJ_DIR$\..\Source\Coordinator.h</name>
     </file>
     <file>
       <name>$PROJ_DIR$\..\Source\OSAL_GenericApp.c</name>
