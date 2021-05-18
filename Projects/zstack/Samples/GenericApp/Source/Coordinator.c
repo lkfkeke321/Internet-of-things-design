@@ -44,10 +44,10 @@ const SimpleDescriptionFormat_t GenericApp_SimpleDesc =
 endPointDesc_t GenericApp_epDesc;  //节点描述符GenericApp_epDesc  在ZigBee协议中新定义的类型一般以"t"结尾
 byte GenericApp_TaskID;   //任务优先级GenericApp_TaskID
 byte GenericApp_TransID;  //数据发送序列号GenericApp_TransID
-unsigned char uartbuf[128];
+//unsigned char uartbuf[128];
 void GenericApp_MessageMSGCB ( afIncomingMSGPacket_t *pckt );//消息梳理函数GenericApp_MessageMSGCB
 void GenericApp_sendTheMessage ( void ) ;//数据发送函数GenericApp_sendTheMessage
-static void rxCB (uint8 port,uint8 event);
+//static void rxCB (uint8 port,uint8 event);
 //声明了两个函数，1、消息处理函数，2、数据发送函数
 /* 宏定义 ----------------------------------------------------------------*/
 /* 结构体或枚举 ----------------------------------------------------------------*/
@@ -79,13 +79,13 @@ void GenericApp_Init( byte task_id )
     uartConfig.configured          = TRUE;
     uartConfig.baudRate            = HAL_UART_BR_115200;
     uartConfig.flowControl         = FALSE;
-    uartConfig.callBackFunc        = rxCB;
+    uartConfig.callBackFunc        = NULL;
     HalUARTOpen (0,&uartConfig);
 }
 //消息处理函数
 UINT16 GenericApp_ProcessEvent( byte task_id,UINT16 events )
 {
-    /*
+    
     afIncomingMSGPacket_t *MSGpkt;//定义了一个指向接收消息结构体的指针 MSGpkt
     if ( events & SYS_EVENT_MSG )
     {
@@ -107,7 +107,7 @@ UINT16 GenericApp_ProcessEvent( byte task_id,UINT16 events )
         return (events ^ SYS_EVENT_MSG) ;
     }
     return 0;
-    */
+    
 }
 /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -118,6 +118,7 @@ UINT16 GenericApp_ProcessEvent( byte task_id,UINT16 events )
 * 时间    ：2021/5/17
 * 描述    ：回调函数
 ----------------------------------------------------------------*/
+/*
 static void rxCB(uint8 port,uint8 event)
 {
     HalUARTRead(0,uartbuf,16);
@@ -126,7 +127,7 @@ static void rxCB(uint8 port,uint8 event)
         HalUARTWrite(0,uartbuf,16);
     }
 }
-
+*/
 /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 * 函数名  ：GenericApp_MessageMSGCB
@@ -138,11 +139,15 @@ static void rxCB(uint8 port,uint8 event)
 ----------------------------------------------------------------*/
 void GenericApp_MessageMSGCB ( afIncomingMSGPacket_t *pkt )
 {
-    unsigned char buffer[4] = "    ";
+    /*unsigned char buffer[4] = "    ";*/
+    unsigned char buffer[10];
     switch ( pkt->clusterId )
     {
     case GENERICAPP_CLUSTERID:
-        osal_memcpy (buffer,pkt->cmd.Data,3);//将收到的数据拷贝到缓冲区 buffer 中
+        /*osal_memcpy (buffer,pkt->cmd.Data,3);*/
+        osal_memcpy (buffer,pkt->cmd.Data,10);//将收到的数据拷贝到缓冲区 buffer 中
+        HalUARTWrite(0,buffer,10);
+        /*
         if ((buffer[0] =='L') || (buffer[1] == 'E') || (buffer [2]=='D'))//判断接收到的数据是不是"LED"三个字符
         {
             HalLedBlink (HAL_LED_2,0,50,500);//是这三个字符，则执行，使LED2闪烁(HalLedBlink功能是使某个LED闪烁)
@@ -151,6 +156,7 @@ void GenericApp_MessageMSGCB ( afIncomingMSGPacket_t *pkt )
         {
             HalLedSet (HAL_LED_2,HAL_LED_MODE_ON);//如果接收到的不是这三个字符则点亮LED2(HalLedSet功能是;设置某个LED的状态) 
         }
+        */
         break;
     }
 }  
