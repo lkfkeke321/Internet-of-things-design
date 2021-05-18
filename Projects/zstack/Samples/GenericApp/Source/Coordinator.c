@@ -3,11 +3,12 @@
 * 文件名  ：Coordinator
 * 作者    ：caiyu
 * 时间    ：2021/5/17
-* 描述    ：协调器的主函数
+* 描述    ：协调器驱动
 ********************************************************************
 * 副本
 *
 *>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
+/* 头文件 ----------------------------------------------------------------*/
 #include "OSAL.h"
 #include "AF.h"
 #include "ZDApp.h"
@@ -43,8 +44,10 @@ const SimpleDescriptionFormat_t GenericApp_SimpleDesc =
 endPointDesc_t GenericApp_epDesc;  //节点描述符GenericApp_epDesc  在ZigBee协议中新定义的类型一般以"t"结尾
 byte GenericApp_TaskID;   //任务优先级GenericApp_TaskID
 byte GenericApp_TransID;  //数据发送序列号GenericApp_TransID
+unsigned char uartbuf[128];
 void GenericApp_MessageMSGCB ( afIncomingMSGPacket_t *pckt );//消息梳理函数GenericApp_MessageMSGCB
 void GenericApp_sendTheMessage ( void ) ;//数据发送函数GenericApp_sendTheMessage
+static void rxCB (uint8 port,uint8 event);
 //声明了两个函数，1、消息处理函数，2、数据发送函数
 /* 宏定义 ----------------------------------------------------------------*/
 /* 结构体或枚举 ----------------------------------------------------------------*/
@@ -64,6 +67,7 @@ void GenericApp_sendTheMessage ( void ) ;//数据发送函数GenericApp_sendTheMessage
 ----------------------------------------------------------------*/
 void GenericApp_Init( byte task_id )
 {
+    halUARTCfg_t uartConfig;
     GenericApp_TaskID              =task_id; //初始化了任务优先级,任务优先级有协议栈的操作系统OSAL分配
     GenericApp_TransID             = 0;      //将发送数据包的序号初始化为 0，在 ZigBee 协议栈中，每发送一个数据包,该发送序号自动加1
     GenericApp_epDesc.endPoint     = GENERICAPP_ENDPOINT;//对节点描述符进行的初始化
@@ -72,10 +76,16 @@ void GenericApp_Init( byte task_id )
         (SimpleDescriptionFormat_t *) &GenericApp_SimpleDesc;
     GenericApp_epDesc.latencyReq   = noLatencyReqs;
     afRegister( &GenericApp_epDesc );//使用 afRegister 函数将节点描述符进行注册，只有注册以后,才可以使用OSAL提供的系统服务
+    uartConfig.configured          = TRUE;
+    uartConfig.baudRate            = HAL_UART_BR_115200;
+    uartConfig.flowControl         = FALSE;
+    uartConfig.callBackFunc        = rxCB;
+    HalUARTOpen (0,&uartConfig);
 }
 //消息处理函数
 UINT16 GenericApp_ProcessEvent( byte task_id,UINT16 events )
 {
+    /*
     afIncomingMSGPacket_t *MSGpkt;//定义了一个指向接收消息结构体的指针 MSGpkt
     if ( events & SYS_EVENT_MSG )
     {
@@ -97,7 +107,26 @@ UINT16 GenericApp_ProcessEvent( byte task_id,UINT16 events )
         return (events ^ SYS_EVENT_MSG) ;
     }
     return 0;
+    */
 }
+/*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+* 函数名  ：rxCB
+* 参数    ：uint8 port,uint8 avent
+* 返回    ：void
+* 作者    ：caiyu
+* 时间    ：2021/5/17
+* 描述    ：回调函数
+----------------------------------------------------------------*/
+static void rxCB(uint8 port,uint8 event)
+{
+    HalUARTRead(0,uartbuf,16);
+    if(osal_memcmp(uartbuf,"www.wlwmaker.com",16))
+    {
+        HalUARTWrite(0,uartbuf,16);
+    }
+}
+
 /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 * 函数名  ：GenericApp_MessageMSGCB
