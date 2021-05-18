@@ -80,7 +80,7 @@
 //    PDATA page setup
 //
 -D?PBANK_NUMBER=00             // High byte of 16-bit address to the PDATA area.
--D?PBANK=93                    // Most significant byte in MOVX A,@R0. (0x93 is sfr MPAGE).
+//-D?PBANK=93                    // Most significant byte in MOVX A,@R0. (0x93 is sfr MPAGE).
 //
 //
 //    Virtual register setup

@@ -1,0 +1,568 @@
+###############################################################################
+#                                                                             #
+# IAR C/C++ Compiler V8.10.3.10338/W32 for 8051         18/May/2021  15:16:49 #
+# Copyright 2004-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Core               =  plain                                              #
+#    Code model         =  banked                                             #
+#    Data model         =  large                                              #
+#    Calling convention =  xdata reentrant                                    #
+#    Constant location  =  data_rom                                           #
+#    Dptr setup         =  1,16                                               #
+#    Source file        =  E:\project1\p3\Internet-of-things-design\Projects\ #
+#                          zstack\Samples\GenericApp\Source\Enddevice.c       #
+#    Command line       =  -f E:\project1\p3\Internet-of-things-design\Projec #
+#                          ts\zstack\Samples\GenericApp\CC2530DB\..\..\..\Too #
+#                          ls\CC2530DB\f8wEndev.cfg (-DCPU32MHZ               #
+#                          -DROOT=__near_func -DBLINK_LEDS) -f                #
+#                          E:\project1\p3\Internet-of-things-design\Projects\ #
+#                          zstack\Samples\GenericApp\CC2530DB\..\..\..\Tools\ #
+#                          CC2530DB\f8wConfig.cfg (-DSECURE=0                 #
+#                          -DZG_SECURE_DYNAMIC=0 -DREFLECTOR                  #
+#                          -DDEFAULT_CHANLIST=0x00000800                      #
+#                          -DZDAPP_CONFIG_PAN_ID=0x2001                       #
+#                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MA #
+#                          SK=0x007F -DBEACON_REQUEST_DELAY=100               #
+#                          -DBEACON_REQ_DELAY_MASK=0x00FF                     #
+#                          -DROUTE_EXPIRY_TIME=30 -DAPSC_ACK_WAIT_DURATION_PO #
+#                          LLED=3000 -DNWK_INDIRECT_MSG_TIMEOUT=7             #
+#                          -DMAX_RREQ_ENTRIES=8 -DAPSC_MAX_FRAME_RETRIES=3    #
+#                          -DNWK_MAX_DATA_RETRIES=2                           #
+#                          -DMAX_POLL_FAILURE_RETRIES=2 -DMAX_BCAST=9         #
+#                          -DAPS_MAX_GROUPS=16 -DMAX_RTG_ENTRIES=40           #
+#                          -DNWK_MAX_BINDING_ENTRIES=4                        #
+#                          -DMAX_BINDING_CLUSTER_IDS=4 "-DDEFAULT_KEY={0x01,  #
+#                          0x03, 0x05, 0x07, 0x09, 0x0B, 0x0D, 0x0F, 0x00,    #
+#                          0x02, 0x04, 0x06, 0x08, 0x0A, 0x0C, 0x0D}"         #
+#                          -DMAC_MAX_FRAME_SIZE=116 "-DCONST=const __code"    #
+#                          -DGENERIC=__generic -DRFD_RCVC_ALWAYS_ON=FALSE     #
+#                          -DPOLL_RATE=1000 -DQUEUED_POLL_RATE=100            #
+#                          -DRESPONSE_POLL_RATE=100) -DREJOIN_POLL_RATE=440   #
+#                          E:\project1\p3\Internet-of-things-design\Projects\ #
+#                          zstack\Samples\GenericApp\Source\Enddevice.c -D    #
+#                          NWK_AUTO_POLL -D ZTOOL_P1 -D MT_TASK -D            #
+#                          MT_SYS_FUNC -D MT_ZDO_FUNC -D LCD_SUPPORTED=DEBUG  #
+#                          -D xPOWER_SAVING -lC E:\project1\p3\Internet-of-th #
+#                          ings-design\Projects\zstack\Samples\GenericApp\CC2 #
+#                          530DB\EndDeviceEB\List\ -lA                        #
+#                          E:\project1\p3\Internet-of-things-design\Projects\ #
+#                          zstack\Samples\GenericApp\CC2530DB\EndDeviceEB\Lis #
+#                          t\ --diag_suppress Pe001,Pa010 -o                  #
+#                          E:\project1\p3\Internet-of-things-design\Projects\ #
+#                          zstack\Samples\GenericApp\CC2530DB\EndDeviceEB\Obj #
+#                          \ -e --debug --core=plain --dptr=16,1              #
+#                          --data_model=large --code_model=banked             #
+#                          --calling_convention=xdata_reentrant               #
+#                          --place_constants=data_rom --nr_virtual_regs 16    #
+#                          -I E:\project1\p3\Internet-of-things-design\Projec #
+#                          ts\zstack\Samples\GenericApp\CC2530DB\ -I          #
+#                          E:\project1\p3\Internet-of-things-design\Projects\ #
+#                          zstack\Samples\GenericApp\CC2530DB\..\SOURCE\ -I   #
+#                          E:\project1\p3\Internet-of-things-design\Projects\ #
+#                          zstack\Samples\GenericApp\CC2530DB\..\..\..\ZMAIN\ #
+#                          TI2530DB\ -I E:\project1\p3\Internet-of-things-des #
+#                          ign\Projects\zstack\Samples\GenericApp\CC2530DB\.. #
+#                          \..\..\..\..\COMPONENTS\MT\ -I                     #
+#                          E:\project1\p3\Internet-of-things-design\Projects\ #
+#                          zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\ #
+#                          COMPONENTS\HAL\INCLUDE\ -I                         #
+#                          E:\project1\p3\Internet-of-things-design\Projects\ #
+#                          zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\ #
+#                          COMPONENTS\HAL\TARGET\CC2530EB\ -I                 #
+#                          E:\project1\p3\Internet-of-things-design\Projects\ #
+#                          zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\ #
+#                          COMPONENTS\OSAL\MCU\CCSOC\ -I                      #
+#                          E:\project1\p3\Internet-of-things-design\Projects\ #
+#                          zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\ #
+#                          COMPONENTS\OSAL\INCLUDE\ -I                        #
+#                          E:\project1\p3\Internet-of-things-design\Projects\ #
+#                          zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\ #
+#                          COMPONENTS\STACK\AF\ -I E:\project1\p3\Internet-of #
+#                          -things-design\Projects\zstack\Samples\GenericApp\ #
+#                          CC2530DB\..\..\..\..\..\COMPONENTS\STACK\NWK\ -I   #
+#                          E:\project1\p3\Internet-of-things-design\Projects\ #
+#                          zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\ #
+#                          COMPONENTS\STACK\SEC\ -I                           #
+#                          E:\project1\p3\Internet-of-things-design\Projects\ #
+#                          zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\ #
+#                          COMPONENTS\STACK\SAPI\ -I                          #
+#                          E:\project1\p3\Internet-of-things-design\Projects\ #
+#                          zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\ #
+#                          COMPONENTS\STACK\SYS\ -I                           #
+#                          E:\project1\p3\Internet-of-things-design\Projects\ #
+#                          zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\ #
+#                          COMPONENTS\STACK\ZDO\ -I                           #
+#                          E:\project1\p3\Internet-of-things-design\Projects\ #
+#                          zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\ #
+#                          COMPONENTS\ZMAC\F8W\ -I E:\project1\p3\Internet-of #
+#                          -things-design\Projects\zstack\Samples\GenericApp\ #
+#                          CC2530DB\..\..\..\..\..\COMPONENTS\ZMAC\ -I        #
+#                          E:\project1\p3\Internet-of-things-design\Projects\ #
+#                          zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\ #
+#                          COMPONENTS\SERVICES\SADDR\ -I                      #
+#                          E:\project1\p3\Internet-of-things-design\Projects\ #
+#                          zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\ #
+#                          COMPONENTS\SERVICES\SDATA\ -I                      #
+#                          E:\project1\p3\Internet-of-things-design\Projects\ #
+#                          zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\ #
+#                          COMPONENTS\MAC\INCLUDE\ -I                         #
+#                          E:\project1\p3\Internet-of-things-design\Projects\ #
+#                          zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\ #
+#                          COMPONENTS\MAC\HIGH_LEVEL\ -I                      #
+#                          E:\project1\p3\Internet-of-things-design\Projects\ #
+#                          zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\ #
+#                          COMPONENTS\MAC\LOW_LEVEL\srf04\ -I                 #
+#                          E:\project1\p3\Internet-of-things-design\Projects\ #
+#                          zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\ #
+#                          COMPONENTS\MAC\LOW_LEVEL\srf04\SINGLE_CHIP\ -Ohz   #
+#                          --require_prototypes                               #
+#    List file          =  E:\project1\p3\Internet-of-things-design\Projects\ #
+#                          zstack\Samples\GenericApp\CC2530DB\EndDeviceEB\Lis #
+#                          t\Enddevice.lst                                    #
+#    Object file        =  E:\project1\p3\Internet-of-things-design\Projects\ #
+#                          zstack\Samples\GenericApp\CC2530DB\EndDeviceEB\Obj #
+#                          \Enddevice.r51                                     #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+E:\project1\p3\Internet-of-things-design\Projects\zstack\Samples\GenericApp\Source\Enddevice.c
+      1          /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+      2          
+      3          * 文件名  ：Enddevice
+      4          * 作者    ：oyyp
+      5          * 时间    ：2021/5/17
+      6          * 描述    ：终端节点的主函数
+      7          ********************************************************************
+      8          * 副本
+      9          *
+     10          *>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
+     11          #include "OSAL.h"
+     12          #include "AF.h"
+     13          #include "ZDApp.h"
+     14          #include "ZDObject.h"
+     15          #include "ZDProfile.h"
+     16          #include <string.h>
+     17          #include "Coordinator.h"
+     18          #include "DebugTrace.h"
+     19          #if !defined( WIN32 )
+     20          #include "OnBoard.h"
+     21          #endif
+     22          #include "hal_lcd.h"
+     23          #include "hal_led.h"
+     24          #include "hal_key.h"
+     25          #include "hal_uart.h"
+     26          
+     27          /* ------------------------------------------------------------------------------------------------
+     28           *                                           Global Variables
+     29           * ------------------------------------------------------------------------------------------------
+     30           */
+
+   \                                 In  segment XDATA_ROM_C, align 1
+     31          const cId_t GenericApp_ClusterList[GENERICAPP_MAX_CLUSTERS] = 
+   \                     GenericApp_ClusterList:
+   \   000000   0100         DW 1
+     32          {
+     33               // GENERICAPP_MAX_CLUSTERS是在 Coordinator.h 文件中定义的宏
+     34              GENERICAPP_CLUSTERID
+     35          };
+     36          
+     37          //下面的数据结构可以用来描述一个 ZigBee 设备节点
+
+   \                                 In  segment XDATA_ROM_C, align 1
+     38          const SimpleDescriptionFormat_t GenericApp_SimpleDesc =
+   \                     GenericApp_SimpleDesc:
+   \   000000   0A           DB 10
+   \   000001   040F         DW 3844
+   \   000003   0100         DW 1
+   \   000005   00           DB 0
+   \   000006   00           DB 0
+   \   000007   0000         DW 0H
+   \   000009   01           DB 1
+   \   00000A   ....         DW GenericApp_ClusterList
+     39          {
+     40              GENERICAPP_ENDPOINT,
+     41              GENERICAPP_PROFID,
+     42              GENERICAPP_DEVICEID,
+     43              GENERICAPP_DEVICE_VERSION,
+     44              GENERICAPP_FLAGS,
+     45              0,
+     46              (cId_t *)NULL,
+     47              GENERICAPP_MAX_CLUSTERS,
+     48              (cId_t *)GenericApp_ClusterList
+     49          };
+     50          
+     51          //节点描述符 GenericApp_epDesc
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     52          endPointDesc_t GenericApp_epDesc; 
+   \                     GenericApp_epDesc:
+   \   000000                DS 6
+   \   000006                REQUIRE __INIT_XDATA_Z
+     53          //任务优先级 GenericApp_TaskID
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     54          byte GenericApp_TaskID;
+   \                     GenericApp_TaskID:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+     55          //数据发送序列号 GenericApp_TransID
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     56          byte GenericApp_TransID;           
+   \                     GenericApp_TransID:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+     57          //保存节点状态的变量 GenericApp_NwkState，
+     58          //该变量的类型为 devStates t（deyStates t是一个枚举类型，记录了该设备的状态）
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     59          devStates_t GenericApp_NwkState;   
+   \                     GenericApp_NwkState:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+     60          //是消息处理函数 GenericApp_MessageMSGCB
+     61          void GenericApp_MessageMSGCB ( afIncomingMSGPacket_t *pckt );
+     62          //数据发送函数 GenericApp_SendTheMessage
+     63          void GenericApp_SendTheMessage ( void );  
+     64          
+     65          //声明了两个函数，1、消息处理函数，2、数据发送函数
+     66          /* 宏定义 ----------------------------------------------------------------*/
+     67          /* 结构体或枚举 ----------------------------------------------------------------*/
+     68          /* 内部函数声明 ----------------------------------------------------------------*/
+     69          
+     70          
+     71          /* 函数 ----------------------------------------------------------------*/
+     72          
+     73          /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+     74          
+     75          * 函数名  ：GenericApp_Init( byte task_id )
+     76          * 参数    ：byte  task_id
+     77          * 返回    ：void
+     78          * 作者    ：oyyp
+     79          * 时间    ：2021/5/17
+     80          * 描述    ：任务初始化函数
+     81          ----------------------------------------------------------------*/
+     82          //任务初始化函数
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+     83          void GenericApp_Init( byte task_id )
+   \                     GenericApp_Init:
+     84          {
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+   \   000005   E9           MOV     A,R1
+     85              //初始化了任务优先级
+     86              GenericApp_TaskID               = task_id; 
+   \   000006   90....       MOV     DPTR,#GenericApp_TaskID
+   \   000009   F0           MOVX    @DPTR,A
+     87              //将设备状态初始化为 DEV_INIT，表示该节点没有连接到 ZigBee网络
+     88              GenericApp_NwkState             = DEV_INIT; 
+   \   00000A   90....       MOV     DPTR,#GenericApp_NwkState
+   \   00000D   7401         MOV     A,#0x1
+   \   00000F   F0           MOVX    @DPTR,A
+     89              //将发送数据包的序号初始化为0
+     90              GenericApp_TransID              = 0;        
+   \   000010   90....       MOV     DPTR,#GenericApp_TransID
+   \   000013   E4           CLR     A
+   \   000014   F0           MOVX    @DPTR,A
+     91              GenericApp_epDesc.endPoint      = GENERICAPP_ENDPOINT;
+   \   000015   90....       MOV     DPTR,#GenericApp_epDesc
+   \   000018   740A         MOV     A,#0xa
+   \   00001A   F0           MOVX    @DPTR,A
+     92              GenericApp_epDesc.task_id       = &GenericApp_TaskID;
+   \   00001B   A3           INC     DPTR
+   \   00001C   74..         MOV     A,#GenericApp_TaskID & 0xff
+   \   00001E   F0           MOVX    @DPTR,A
+   \   00001F   A3           INC     DPTR
+   \   000020   74..         MOV     A,#(GenericApp_TaskID >> 8) & 0xff
+   \   000022   F0           MOVX    @DPTR,A
+     93              GenericApp_epDesc.simpleDesc    = (SimpleDescriptionFormat_t *)&GenericApp_SimpleDesc;
+   \   000023   A3           INC     DPTR
+   \   000024   74..         MOV     A,#GenericApp_SimpleDesc & 0xff
+   \   000026   F0           MOVX    @DPTR,A
+   \   000027   A3           INC     DPTR
+   \   000028   74..         MOV     A,#(GenericApp_SimpleDesc >> 8) & 0xff
+   \   00002A   F0           MOVX    @DPTR,A
+     94              //对节点描述符进行的初始化
+     95              GenericApp_epDesc.latencyReq    = noLatencyReqs;  
+   \   00002B   A3           INC     DPTR
+   \   00002C   E4           CLR     A
+   \   00002D   F0           MOVX    @DPTR,A
+     96              //使用 afRegister 函数将节点描述符进行注册，只有注册后，才可以使用 OSAL 提供的系统服务。
+     97              afRegister ( &GenericApp_epDesc );   
+   \   00002E                ; Setup parameters for call to function afRegister
+   \   00002E   7A..         MOV     R2,#GenericApp_epDesc & 0xff
+   \   000030   7B..         MOV     R3,#(GenericApp_epDesc >> 8) & 0xff
+   \   000032   12....       LCALL   ??afRegister?relay
+     98          }
+   \   000035   7F01         MOV     R7,#0x1
+   \   000037   02....       LJMP    ?BANKED_LEAVE_XDATA
+     99          
+    100          
+    101          //消息处理函数(大部分代码是固定的)
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    102          UINT16 GenericApp_ProcessEvent ( byte task_id, UINT16 events )
+   \                     GenericApp_ProcessEvent:
+    103          {
+   \   000000   74F4         MOV     A,#-0xc
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 12
+   \   000005                ; Auto size: 0
+   \   000005   8A..         MOV     ?V0 + 0,R2
+   \   000007   8B..         MOV     ?V0 + 1,R3
+    104              afIncomingMSGPacket_t *MSGpkt;
+    105              if ( events & SYS_EVENT_MSG )
+   \   000009   EB           MOV     A,R3
+   \   00000A   5480         ANL     A,#0x80
+   \   00000C   603C         JZ      ??GenericApp_ProcessEvent_0
+    106              {
+    107                  MSGpkt = (afIncomingMSGPacket_t *)osal_msg_receive(GenericApp_TaskID );
+   \   00000E                ; Setup parameters for call to function osal_msg_receive
+   \   00000E   801D         SJMP    ??GenericApp_ProcessEvent_1
+    108                  while( MSGpkt )
+    109                  {
+    110                      switch ( MSGpkt->hdr.event )
+   \                     ??GenericApp_ProcessEvent_2:
+   \   000010   8E82         MOV     DPL,R6
+   \   000012   8F83         MOV     DPH,R7
+   \   000014   E0           MOVX    A,@DPTR
+   \   000015   64D1         XRL     A,#0xd1
+   \   000017   700D         JNZ     ??GenericApp_ProcessEvent_3
+    111                      {
+    112                      case ZDO_STATE_CHANGE:
+    113                          //读取节点的设备类型
+    114                          GenericApp_NwkState = (devStates_t)(MSGpkt ->hdr.status);
+   \   000019   A3           INC     DPTR
+   \   00001A   E0           MOVX    A,@DPTR
+   \   00001B   90....       MOV     DPTR,#GenericApp_NwkState
+   \   00001E   F0           MOVX    @DPTR,A
+    115                          //对节点设备类型进行判断
+    116                          if (GenericApp_NwkState == DEV_END_DEVICE)   
+   \   00001F   6406         XRL     A,#0x6
+   \   000021   7003         JNZ     ??GenericApp_ProcessEvent_3
+    117                          {
+    118                              //是终端节点（设备类型码为 DEV_END_DEVICE)实现无线数据发送
+    119                              GenericApp_SendTheMessage();    
+   \   000023                ; Setup parameters for call to function GenericApp_SendTheMessage
+   \   000023   12....       LCALL   ??GenericApp_SendTheMessage?relay
+    120                          }
+    121                          break;
+    122                      default:
+    123                          break;
+    124                      }
+    125                      osal_msg_deallocate( (uint8 *)MSGpkt );
+   \                     ??GenericApp_ProcessEvent_3:
+   \   000026                ; Setup parameters for call to function osal_msg_deallocate
+   \   000026   EE           MOV     A,R6
+   \   000027   FA           MOV     R2,A
+   \   000028   EF           MOV     A,R7
+   \   000029   FB           MOV     R3,A
+   \   00002A   12....       LCALL   ??osal_msg_deallocate?relay
+    126                      MSGpkt = (afIncomingMSGPacket_t *)osal_msg_receive
+    127                          ( GenericApp_TaskID );
+   \   00002D                ; Setup parameters for call to function osal_msg_receive
+   \                     ??GenericApp_ProcessEvent_1:
+   \   00002D   90....       MOV     DPTR,#GenericApp_TaskID
+   \   000030   E0           MOVX    A,@DPTR
+   \   000031   F9           MOV     R1,A
+   \   000032   12....       LCALL   ??osal_msg_receive?relay
+   \   000035   8A..         MOV     ?V0 + 2,R2
+   \   000037   8B..         MOV     ?V0 + 3,R3
+   \   000039   AE..         MOV     R6,?V0 + 2
+   \   00003B   AF..         MOV     R7,?V0 + 3
+    128                  }
+   \   00003D   EE           MOV     A,R6
+   \   00003E   4F           ORL     A,R7
+   \   00003F   70CF         JNZ     ??GenericApp_ProcessEvent_2
+    129                  return (events ^ SYS_EVENT_MSG);
+   \   000041   AA..         MOV     R2,?V0 + 0
+   \   000043   E5..         MOV     A,?V0 + 1
+   \   000045   6480         XRL     A,#0x80
+   \   000047   FB           MOV     R3,A
+   \   000048   8004         SJMP    ??GenericApp_ProcessEvent_4
+    130              }
+    131              return 0;
+   \                     ??GenericApp_ProcessEvent_0:
+   \   00004A   7A00         MOV     R2,#0x0
+   \   00004C   7B00         MOV     R3,#0x0
+   \                     ??GenericApp_ProcessEvent_4:
+   \   00004E   7F04         MOV     R7,#0x4
+   \   000050   02....       LJMP    ?BANKED_LEAVE_XDATA
+    132          }
+    133          
+    134          /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    135          
+    136          * 函数名  ：GenericApp_SendTheMessage
+    137          * 参数    ：void
+    138          * 返回    ：void
+    139          * 作者    ：oyyp
+    140          * 时间    ：2021/5/17
+    141          * 描述    ：消息发送函数
+    142          ----------------------------------------------------------------*/
+    143          //实现了数据发送
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    144          void GenericApp_SendTheMessage( void )
+   \                     GenericApp_SendTheMessage:
+    145          {
+   \   000000   74F6         MOV     A,#-0xa
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 10
+   \   000005                ; Auto size: 16
+   \   000005   74F0         MOV     A,#-0x10
+   \   000007   12....       LCALL   ?ALLOC_XSTACK8
+    146              //定义了一个数组 theMessageData，用于存放要发送的数据
+    147              unsigned char theMessageData[4] = "LED";
+   \   00000A   85..82       MOV     DPL,?XSP + 0
+   \   00000D   85..83       MOV     DPH,?XSP + 1
+   \   000010   AC82         MOV     R4,DPL
+   \   000012   AD83         MOV     R5,DPH
+   \   000014   7583..       MOV     DPH,#(`?<Constant "LED">` >> 8) & 0xff
+   \   000017   7582..       MOV     DPL,#`?<Constant "LED">` & 0xff
+   \   00001A   7404         MOV     A,#0x4
+   \   00001C   12....       LCALL   ?MOVE_LONG8_XDATA_XDATA
+    148              //定义了一个afAddrType t类型的变量my_DstAddr
+    149              afAddrType_t my_DstAddr; 
+    150              //将发送地址模式设置为单播（Addr16Bit 表示单播）
+    151              my_DstAddr.addrMode = (afAddrMode_t)Addr16Bit;  
+   \   00001F   740C         MOV     A,#0xc
+   \   000021   12....       LCALL   ?XSTACK_DISP0_8
+   \   000024   7402         MOV     A,#0x2
+   \   000026   F0           MOVX    @DPTR,A
+    152              //初始化端口号
+    153              my_DstAddr.endPoint = GENERICAPP_ENDPOINT; 
+   \   000027   740D         MOV     A,#0xd
+   \   000029   12....       LCALL   ?XSTACK_DISP0_8
+   \   00002C   740A         MOV     A,#0xa
+   \   00002E   F0           MOVX    @DPTR,A
+    154              //在 ZigBee 网络中，协调器的网络地址是固定的，为 0x0000，因此，向协调器发送时，可以直接指定协调器的网络地址
+    155              my_DstAddr.addr.shortAddr = 0x0000;  
+   \   00002F   7404         MOV     A,#0x4
+   \   000031   12....       LCALL   ?XSTACK_DISP0_8
+   \   000034   E4           CLR     A
+   \   000035   F0           MOVX    @DPTR,A
+   \   000036   A3           INC     DPTR
+   \   000037   F0           MOVX    @DPTR,A
+    156              //调用数据发送函数 AF_DataRequest 进行无线数据的发送
+    157              AF_DataRequest( &my_DstAddr, &GenericApp_epDesc,  
+    158                             GENERICAPP_CLUSTERID,
+    159                             3,
+    160                             theMessageData,
+    161                             &GenericApp_TransID,
+    162                             AF_DISCV_ROUTE,
+    163                             AF_DEFAULT_RADIUS );
+   \   000038                ; Setup parameters for call to function AF_DataRequest
+   \   000038   75..1E       MOV     ?V0 + 0,#0x1e
+   \   00003B   78..         MOV     R0,#?V0 + 0
+   \   00003D   12....       LCALL   ?PUSH_XSTACK_I_ONE
+   \   000040   75....       MOV     ?V0 + 0,#GenericApp_TransID & 0xff
+   \   000043   75....       MOV     ?V0 + 1,#(GenericApp_TransID >> 8) & 0xff
+   \   000046   78..         MOV     R0,#?V0 + 0
+   \   000048   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   00004B   7403         MOV     A,#0x3
+   \   00004D   12....       LCALL   ?XSTACK_DISP0_8
+   \   000050   8582..       MOV     ?V0 + 0,DPL
+   \   000053   8583..       MOV     ?V0 + 1,DPH
+   \   000056   78..         MOV     R0,#?V0 + 0
+   \   000058   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   00005B   75..03       MOV     ?V0 + 0,#0x3
+   \   00005E   75..00       MOV     ?V0 + 1,#0x0
+   \   000061   78..         MOV     R0,#?V0 + 0
+   \   000063   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000066   75..01       MOV     ?V0 + 0,#0x1
+   \   000069   78..         MOV     R0,#?V0 + 0
+   \   00006B   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   00006E   7920         MOV     R1,#0x20
+   \   000070   7C..         MOV     R4,#GenericApp_epDesc & 0xff
+   \   000072   7D..         MOV     R5,#(GenericApp_epDesc >> 8) & 0xff
+   \   000074   740D         MOV     A,#0xd
+   \   000076   12....       LCALL   ?XSTACK_DISP0_8
+   \   000079   AA82         MOV     R2,DPL
+   \   00007B   AB83         MOV     R3,DPH
+   \   00007D   12....       LCALL   ??AF_DataRequest?relay
+   \   000080   7409         MOV     A,#0x9
+   \   000082   12....       LCALL   ?DEALLOC_XSTACK8
+    164              //调用 HalLedBlink 函数，使终端节点的LED2闪烁
+    165              HalLedBlink(HAL_LED_2,0,50,500);
+   \   000085                ; Setup parameters for call to function HalLedBlink
+   \   000085   7CF4         MOV     R4,#-0xc
+   \   000087   7D01         MOV     R5,#0x1
+   \   000089   7B32         MOV     R3,#0x32
+   \   00008B   7A00         MOV     R2,#0x0
+   \   00008D   7902         MOV     R1,#0x2
+   \   00008F   12....       LCALL   ??HalLedBlink?relay
+    166          }
+   \   000092   7410         MOV     A,#0x10
+   \   000094   12....       LCALL   ?DEALLOC_XSTACK8
+   \   000097   7F02         MOV     R7,#0x2
+   \   000099   02....       LJMP    ?BANKED_LEAVE_XDATA
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??GenericApp_Init?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    GenericApp_Init
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??GenericApp_ProcessEvent?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    GenericApp_ProcessEvent
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??GenericApp_SendTheMessage?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    GenericApp_SendTheMessage
+
+   \                                 In  segment XDATA_ROM_C, align 1
+   \                     `?<Constant "LED">`:
+   \   000000   4C454400     DB "LED"
+
+   Maximum stack usage in bytes:
+
+     Function                       ISTACK PSTACK XSTACK
+     --------                       ------ ------ ------
+     GenericApp_Init                    0      0      9
+       -> afRegister                    0      0     18
+     GenericApp_ProcessEvent            0      0     12
+       -> osal_msg_receive              0      0     24
+       -> GenericApp_SendTheMessage     0      0     24
+       -> osal_msg_deallocate           0      0     24
+       -> osal_msg_receive              0      0     24
+     GenericApp_SendTheMessage          2      0     47
+       -> AF_DataRequest                0      0     70
+       -> HalLedBlink                   0      0     52
+
+
+   Segment part sizes:
+
+     Function/Label                    Bytes
+     --------------                    -----
+     GenericApp_ClusterList               2
+     GenericApp_SimpleDesc               12
+     GenericApp_epDesc                    6
+     GenericApp_TaskID                    1
+     GenericApp_TransID                   1
+     GenericApp_NwkState                  1
+     GenericApp_Init                     58
+     GenericApp_ProcessEvent             83
+     GenericApp_SendTheMessage          156
+     ??GenericApp_Init?relay              6
+     ??GenericApp_ProcessEvent?relay      6
+     ??GenericApp_SendTheMessage?relay    6
+     ?<Constant "LED">                    4
+
+ 
+ 297 bytes in segment BANKED_CODE
+  18 bytes in segment BANK_RELAYS
+  18 bytes in segment XDATA_ROM_C
+   9 bytes in segment XDATA_Z
+ 
+ 315 bytes of CODE  memory
+  18 bytes of CONST memory
+   9 bytes of XDATA memory
+
+Errors: none
+Warnings: none

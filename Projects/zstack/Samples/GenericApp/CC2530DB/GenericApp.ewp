@@ -6371,9 +6371,18 @@
     <name>App</name>
     <file>
       <name>$PROJ_DIR$\..\Source\Coordinator.c</name>
+      <excluded>
+        <configuration>EndDeviceEB</configuration>
+      </excluded>
     </file>
     <file>
       <name>$PROJ_DIR$\..\Source\Coordinator.h</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\Source\Enddevice.c</name>
+      <excluded>
+        <configuration>CoordinatorEB</configuration>
+      </excluded>
     </file>
     <file>
       <name>$PROJ_DIR$\..\Source\OSAL_GenericApp.c</name>
