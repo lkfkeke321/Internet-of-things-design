@@ -24,6 +24,8 @@
 #include "hal_key.h"
 #include "hal_uart.h"
 
+#define SEND_DATA_EVENT 0x01
+
 /* ------------------------------------------------------------------------------------------------
  *                                           Global Variables
  * ------------------------------------------------------------------------------------------------
@@ -87,11 +89,11 @@ void GenericApp_Init( byte task_id )
     //将设备状态初始化为 DEV_INIT，表示该节点没有连接到 ZigBee网络
     GenericApp_NwkState             = DEV_INIT; 
     //将发送数据包的序号初始化为0
-    GenericApp_TransID              = 0;        
+    GenericApp_TransID              = 0;   
+    //对节点描述符进行的初始化
     GenericApp_epDesc.endPoint      = GENERICAPP_ENDPOINT;
     GenericApp_epDesc.task_id       = &GenericApp_TaskID;
     GenericApp_epDesc.simpleDesc    = (SimpleDescriptionFormat_t *)&GenericApp_SimpleDesc;
-    //对节点描述符进行的初始化
     GenericApp_epDesc.latencyReq    = noLatencyReqs;  
     //使用 afRegister 函数将节点描述符进行注册，只有注册后，才可以使用 OSAL 提供的系统服务。
     afRegister ( &GenericApp_epDesc );   
@@ -101,12 +103,14 @@ void GenericApp_Init( byte task_id )
 //消息处理函数(大部分代码是固定的)
 UINT16 GenericApp_ProcessEvent ( byte task_id, UINT16 events )
 {
+    //定义一个接收消息结构体的指针MSGpkt
     afIncomingMSGPacket_t *MSGpkt;
     if ( events & SYS_EVENT_MSG )
     {
         MSGpkt = (afIncomingMSGPacket_t *)osal_msg_receive(GenericApp_TaskID );
         while( MSGpkt )
         {
+            //对消息进行推断
             switch ( MSGpkt->hdr.event )
             {
             case ZDO_STATE_CHANGE:
@@ -116,7 +120,8 @@ UINT16 GenericApp_ProcessEvent ( byte task_id, UINT16 events )
                 if (GenericApp_NwkState == DEV_END_DEVICE)   
                 {
                     //是终端节点（设备类型码为 DEV_END_DEVICE)实现无线数据发送
-                    GenericApp_SendTheMessage();    
+                    //GenericApp_SendTheMessage();  
+                    osal_set_event(GenericApp_TaskID,SEND_DATA_EVENT);
                 }
                 break;
             default:
@@ -127,6 +132,13 @@ UINT16 GenericApp_ProcessEvent ( byte task_id, UINT16 events )
                 ( GenericApp_TaskID );
         }
         return (events ^ SYS_EVENT_MSG);
+    }
+    if(events & SEND_DATA_EVENT)
+    {
+        GenericApp_SendTheMessage();
+        osal_msg_timeEx(GenericApp_TaskID,SEND_DATA_EVENT,1000);
+        return (events ^ SEND_DATA_EVENT);
+        
     }
     return 0;
 }
@@ -156,7 +168,8 @@ void GenericApp_SendTheMessage( void )
     //调用数据发送函数 AF_DataRequest 进行无线数据的发送
     AF_DataRequest( &my_DstAddr, &GenericApp_epDesc,  
                    GENERICAPP_CLUSTERID,
-                   3,
+                   //3,
+                   osal_strlen("EndDevice")+1,
                    theMessageData,
                    &GenericApp_TransID,
                    AF_DISCV_ROUTE,
